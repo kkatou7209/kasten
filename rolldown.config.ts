@@ -1,5 +1,6 @@
 import { defineConfig } from 'rolldown/config';
 import { dts } from 'rolldown-plugin-dts'
+import path from 'path';
 
 export default defineConfig({
     input: 'src/index.ts',
@@ -10,5 +11,10 @@ export default defineConfig({
     },
     plugins: [
         dts(),
-    ]
+    ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+        }
+    }
 });

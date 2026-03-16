@@ -3,9 +3,6 @@
  */
 export abstract class Base64 {
 
-    protected static readonly TABLE: string
-        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-
     /**
      * Encodes byte array to string.
      */
