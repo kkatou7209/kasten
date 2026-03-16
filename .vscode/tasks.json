@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "command": "bun",
+            "args": ["run", "build"],
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "label": "Test",
+            "command": "bun",
+            "args": ["test"],
+            "type": "shell",
+            "problemMatcher": []
+        },
+    ]
+}

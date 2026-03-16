@@ -1,11 +1,16 @@
 {
-  "name": "kasten",
-  "module": "src/index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+	"name": "kasten",
+	"module": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"build": "rolldown -c rolldown.config.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"rolldown": "^1.0.0-rc.9",
+		"rolldown-plugin-dts": "^0.22.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }

@@ -1,0 +1,14 @@
+{
+    "name": "Kasten: Bun",
+    "dockerComposeFile": "compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "bun i",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.vscode-typescript-next"
+            ]
+        }
+    }
+}
