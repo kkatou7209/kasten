@@ -1,10 +1,10 @@
 import { describe, expect } from 'bun:test';
 import { it } from 'node:test';
-import { Rfc2045Base64 } from '@/base64/js/rfc2045';
+import { RFC2045Base64 } from '@/base64/rfc2045/rfc2045';
 
 describe('Rfc2045 tests', () => {
 
-    it('should encode to base64', () => {
+    it('should encode and decode base64', () => {
 
         const cases = [
             ['', ''],
@@ -24,15 +24,20 @@ describe('Rfc2045 tests', () => {
             ]
         ];
 
-        const base64 = new Rfc2045Base64();
+        const base64 = new RFC2045Base64();
 
         const textEncoder = new TextEncoder();
+        const textDecoder = new TextDecoder();
 
         for(const _case of cases) {
 
             const bytes = textEncoder.encode(_case[0]);
 
-            expect(base64.encode(bytes)).toEqual(_case[1]!);
+            const encoded = base64.encode(bytes);
+
+            expect(encoded).toEqual(_case[1]!);
+
+            expect(textDecoder.decode(base64.decode(encoded)), _case[0]);
         }
     });
 });
