@@ -1,3 +1,5 @@
+export type Base64Catgory = 'rfc4648' | 'rfc4648-url' | 'rfc2025';
+
 /**
  * Base64 codec.
  */

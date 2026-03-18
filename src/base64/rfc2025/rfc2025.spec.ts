@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'bun:test';
 import { KastenBase64DecodeError } from '@/base64/errors';
-import { RFC4648Base64 } from '@/base64/rfc4648/rfc4648';
+import { RFC2025Base64 } from '@/base64/rfc2025/rfc2025';
 
-describe('RFC4648Base64 tests', () => {
+describe('RFC2025Base64 tests', () => {
 
     it('should encode and decode base64', () => {
 
@@ -20,11 +20,11 @@ describe('RFC4648Base64 tests', () => {
             ],
             [
                 'A'.repeat(58),
-                'QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQQ=='
+                'QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFB\r\nQQ=='
             ]
         ];
 
-        const base64 = new RFC4648Base64();
+        const base64 = new RFC2025Base64();
 
         const textEncoder = new TextEncoder();
         const textDecoder = new TextDecoder();
@@ -43,7 +43,7 @@ describe('RFC4648Base64 tests', () => {
 
     it('should use the standard base64 alphabet during encoding', () => {
 
-        const base64 = new RFC4648Base64();
+        const base64 = new RFC2025Base64();
         const bytes = Uint8Array.from([251, 255, 255]);
 
         expect(base64.encode(bytes)).toEqual('+///');
@@ -52,7 +52,7 @@ describe('RFC4648Base64 tests', () => {
 
     it('should ignore ASCII whitespace while decoding', () => {
 
-        const base64 = new RFC4648Base64();
+        const base64 = new RFC2025Base64();
         const textDecoder = new TextDecoder();
 
         expect(textDecoder.decode(base64.decode(' Zm9v\r\n\tYmFy '))).toEqual('foobar');
@@ -60,7 +60,7 @@ describe('RFC4648Base64 tests', () => {
 
     it('should reject invalid base64 strings', () => {
 
-        const base64 = new RFC4648Base64();
+        const base64 = new RFC2025Base64();
 
         expect(() => base64.decode('abc')).toThrow(KastenBase64DecodeError);
         expect(() => base64.decode('ab=c')).toThrow(KastenBase64DecodeError);

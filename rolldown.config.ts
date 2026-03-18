@@ -8,6 +8,7 @@ export default defineConfig({
         dir: 'dist',
         format: 'esm',
         entryFileNames: '[name].js',
+        minify: true,
     },
     plugins: [
         dts(),
