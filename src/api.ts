@@ -1,5 +1,5 @@
 import type { Base64, Base64Catgory } from "./base64";
-import { RFC2025Base64 } from "./base64/rfc2025/rfc2025";
+import { RFC2045Base64 } from "./base64/rfc2045/rfc2045";
 import { RFC4648Base64 } from "./base64/rfc4648/rfc4648";
 import { RFC4648Base64URL } from "./base64/rfc4648/rfc4648url";
 import { KastenError } from '@/errors';
@@ -18,7 +18,7 @@ export class Kasten {
             case 'rfc4648-url':
                 return new RFC4648Base64URL();
             case 'rfc2025':
-                return new RFC2025Base64();
+                return new RFC2045Base64();
             default:
                 throw new KastenError(`No Base64 implementation found for '${category}'`);
         }
