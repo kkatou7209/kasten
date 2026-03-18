@@ -1,13 +1,13 @@
-import { Base64 } from '@/base64';
-import { KastenBase64DecodeError } from '@/base64/errors';
 import { CharCodes } from '@/char-codes';
+import { KastenBase64DecodeError } from '@/base64/errors';
+import { Base64 } from '@/base64';
 
-export class RFC2045Base64 extends Base64 {
-
+export class RFC4648Base64URL extends Base64 {
+    
     private static readonly PADDING_CHAR_CODE = '='.charCodeAt(0);
 
     private static readonly TABLE: string
-        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+        = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
     private static readonly DECODE_TABLE = new Uint8Array(256);
 
@@ -18,7 +18,7 @@ export class RFC2045Base64 extends Base64 {
     private static readonly decoder = new TextDecoder();
 
     static {
-
+    
         this.DECODE_TABLE.fill(255);
 
         for (let i = 0; i < this.TABLE.length; i++) {
@@ -30,7 +30,7 @@ export class RFC2045Base64 extends Base64 {
 
         if (bytes.length === 0) return '';
 
-        const ENCODE_TABLE = RFC2045Base64.ENCODE_TABLE;
+        const ENCODE_TABLE = RFC4648Base64URL.ENCODE_TABLE;
 
         const baseSize = Math.ceil(bytes.length / 3) * 4;
         const linebreaks = Math.floor((baseSize - 1) / 76);
@@ -69,18 +69,18 @@ export class RFC2045Base64 extends Base64 {
         const remain = bytes.length % 3;
 
         if (remain === 1) {
-            chars[ci - 2] = RFC2045Base64.PADDING_CHAR_CODE;
-            chars[ci - 1] = RFC2045Base64.PADDING_CHAR_CODE;
+            chars[ci - 2] = RFC4648Base64URL.PADDING_CHAR_CODE;
+            chars[ci - 1] = RFC4648Base64URL.PADDING_CHAR_CODE;
         } else if (remain === 2) {
-            chars[ci - 1] = RFC2045Base64.PADDING_CHAR_CODE;
+            chars[ci - 1] = RFC4648Base64URL.PADDING_CHAR_CODE;
         }
 
-        return RFC2045Base64.decoder.decode(chars.subarray(0, ci));
+        return RFC4648Base64URL.decoder.decode(chars.subarray(0, ci));
     }
     
     public override decode = (base64: string): Uint8Array => {
 
-        const DECODE_TABLE = RFC2045Base64.DECODE_TABLE;
+        const DECODE_TABLE = RFC4648Base64URL.DECODE_TABLE;
 
         const line = new Uint8Array(base64.length);
         let lineCharCount = 0;
@@ -102,7 +102,7 @@ export class RFC2045Base64 extends Base64 {
         let firstPad = -1;
 
         for (let i = 0; i < lineCharCount; i++) {
-            if (line[i] === RFC2045Base64.PADDING_CHAR_CODE) {
+            if (line[i] === RFC4648Base64URL.PADDING_CHAR_CODE) {
                 firstPad = i;
                 break;
             }
@@ -115,7 +115,7 @@ export class RFC2045Base64 extends Base64 {
             }
 
             for (let i = firstPad; i < lineCharCount; i++) {
-                if (line[i] !== RFC2045Base64.PADDING_CHAR_CODE) {
+                if (line[i] !== RFC4648Base64URL.PADDING_CHAR_CODE) {
                     throw new KastenBase64DecodeError('Invalid padding');
                 }
             }
@@ -130,8 +130,8 @@ export class RFC2045Base64 extends Base64 {
         const lineLength = lineCharCount;
 
         const padding = 
-            line[lineLength - 1] === RFC2045Base64.PADDING_CHAR_CODE
-            ? (line[lineLength - 2] === RFC2045Base64.PADDING_CHAR_CODE ? 2 : 1)
+            line[lineLength - 1] === RFC4648Base64URL.PADDING_CHAR_CODE
+            ? (line[lineLength - 2] === RFC4648Base64URL.PADDING_CHAR_CODE ? 2 : 1)
             : 0;
 
         const bytes = new Uint8Array((lineCharCount / 4) * 3 - padding);
@@ -147,13 +147,13 @@ export class RFC2045Base64 extends Base64 {
 
             const ci1 = DECODE_TABLE[code1]!;
             const ci2 = DECODE_TABLE[code2]!;
-            const ci3 = code3 !== RFC2045Base64.PADDING_CHAR_CODE ? DECODE_TABLE[code3]! : 0;
-            const ci4 = code4 !== RFC2045Base64.PADDING_CHAR_CODE ? DECODE_TABLE[code4]! : 0;
+            const ci3 = code3 !== RFC4648Base64URL.PADDING_CHAR_CODE ? DECODE_TABLE[code3]! : 0;
+            const ci4 = code4 !== RFC4648Base64URL.PADDING_CHAR_CODE ? DECODE_TABLE[code4]! : 0;
 
             if (ci1 === 255 ||
                 ci2 === 255 ||
-                (code3 !== RFC2045Base64.PADDING_CHAR_CODE && ci3 === 255) ||
-                (code4 !== RFC2045Base64.PADDING_CHAR_CODE && ci4 === 255)) {
+                (code3 !== RFC4648Base64URL.PADDING_CHAR_CODE && ci3 === 255) ||
+                (code4 !== RFC4648Base64URL.PADDING_CHAR_CODE && ci4 === 255)) {
 
                 throw new KastenBase64DecodeError("Invalid Base64");
             }
@@ -164,11 +164,11 @@ export class RFC2045Base64 extends Base64 {
 
             bytes[writtenOffset++] = b1;
             
-            if (code3 !== RFC2045Base64.PADDING_CHAR_CODE) {
+            if (code3 !== RFC4648Base64URL.PADDING_CHAR_CODE) {
                 bytes[writtenOffset++] = b2;
             }
 
-            if (code4 !== RFC2045Base64.PADDING_CHAR_CODE) {
+            if (code4 !== RFC4648Base64URL.PADDING_CHAR_CODE) {
                 bytes[writtenOffset++] = b3;
             }
         }
