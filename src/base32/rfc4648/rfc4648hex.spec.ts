@@ -23,7 +23,7 @@ describe('RFC4648Base32Hex tests', () => {
 
             const bytes = encoder.encode(_case[0]!);
 
-            expect(base32.ecode(bytes)).toEqual(_case[1]!);
+            expect(base32.encode(bytes)).toEqual(_case[1]!);
             expect(base32.decode(_case[1]!)).toEqual(bytes);
         }
     });
