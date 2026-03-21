@@ -23,7 +23,7 @@ export class RFC4648Base32 extends Base32 {
         }
     }
 
-    public override ecode(bytes: Uint8Array): string {
+    public override encode(bytes: Uint8Array): string {
 
         const ENCODED_TABLE = RFC4648Base32.ENCODED_TABLE;
 
