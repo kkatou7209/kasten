@@ -1,11 +1,36 @@
 {
-  "name": "kasten",
-  "module": "src/index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+	"name": "casten",
+	"version": "0.1.0",
+	"description": "TypeScript Toolbox of Codecs and Cryptgraphies",
+	"keywords": ["codec", "base64", "encoding", "decoding", "encode", "decode"],
+	"author": "kkatou7209@gmail.com",
+	"type": "module",
+	"license": "MIT",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"module": "./dist/index.ts",
+	"files": ["dist"],
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kkatou7209/kasten"
+	},
+	"scripts": {
+		"build": "rolldown -c rolldown.config.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"@types/node": "^25.5.0",
+		"rolldown": "^1.0.0-rc.9",
+		"rolldown-plugin-dts": "^0.22.5"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	}
 }
