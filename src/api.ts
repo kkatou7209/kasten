@@ -6,15 +6,16 @@ import { type Base64, type Base64Catgory } from './base64';
 import { RFC2045Base64 } from './base64/rfc2045/rfc2045';
 import { RFC4648Base64 } from './base64/rfc4648/rfc4648';
 import { RFC4648Base64URL } from './base64/rfc4648/rfc4648url';
+import type { RunLength, RunLengthCatgory } from './run-length';
+import { BasicRunLength } from './run-length/basic/basic-run-length';
 
 export class Kasten {
 
     private constructor() {}
 
     /**
-     * 
-     * @param category 
-     * @returns 
+     * Creates Base 64 codec instance.
+     * @param category Base 64 category.
      */
     public static base64 = (category?: Base64Catgory): Base64 => {
 
@@ -30,6 +31,10 @@ export class Kasten {
         }
     }
 
+    /**
+     * Creates Base 32 codec instance.
+     * @param category Base 32 category.
+     */
     public static base32 = (category?: Base32Category): Base32 => {
 
         switch(category) {
@@ -42,7 +47,19 @@ export class Kasten {
         }
     }
 
+    /**
+     * Create Base 16 codec instance.
+     */
     public static base16 = () => {
         return new RFC4648Base16();
+    }
+
+    public static runLength = (category?: RunLengthCatgory): RunLength => {
+
+        switch(category) {
+            case 'basic':
+            default:
+                return new BasicRunLength();
+        }
     }
 }
