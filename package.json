@@ -1,5 +1,5 @@
 {
-	"name": "@kkatou7209/casten",
+	"name": "casten",
 	"version": "0.1.0",
 	"description": "TypeScript Toolbox of Codecs and Cryptgraphies",
 	"keywords": ["codec", "base64", "encoding", "decoding", "encode", "decode"],
