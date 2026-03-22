@@ -1,7 +1,7 @@
 {
-    "name": "Kasten: Bun",
+    "name": "Casten: Bun",
     "dockerComposeFile": "compose.yml",
-    "service": "app",
+    "service": "bun",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "bun i",
     "customizations": {
