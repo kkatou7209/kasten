@@ -9,7 +9,7 @@ import { RFC4648Base64URL } from './base64/rfc4648/rfc4648url';
 import type { RunLength, RunLengthCatgory } from './run-length';
 import { BasicRunLength } from './run-length/basic/basic-run-length';
 
-export class Kasten {
+export class Casten {
 
     private constructor() {}
 

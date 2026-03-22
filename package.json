@@ -1,6 +1,6 @@
 {
-	"name": "kasten",
-	"version": "0.0.0",
+	"name": "casten",
+	"version": "0.1.0",
 	"description": "TypeScript Toolbox of Codecs and Cryptgraphies",
 	"keywords": ["codec", "base64", "encoding", "decoding", "encode", "decode"],
 	"author": "kkatou7209@gmail.com",
@@ -9,6 +9,7 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"module": "./dist/index.ts",
+	"files": ["dist"],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
