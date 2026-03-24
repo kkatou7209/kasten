@@ -1,6 +1,6 @@
 {
 	"name": "kasten-js",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "TypeScript Toolbox of Codecs and Cryptgraphies",
 	"keywords": ["codec", "base64", "encoding", "decoding", "encode", "decode"],
 	"author": "kkatou7209@gmail.com",
