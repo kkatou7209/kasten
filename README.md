@@ -10,6 +10,8 @@
   - RFC4648 (Hex)
 - Base 16 Encoding/Decoding
   - RFC4648
+- Base 85
+  - Ascii85 (WIP)
 - Run-Length Encoding/Decoding
   - Basic
   - PackBits
