@@ -3,9 +3,16 @@
 ## Features
 
 - Base 64 Encoding/Decoding
+  - RFC2045
+  - RFC4648
 - Base 32 Encoding/Decoding
+  - RFC4648
+  - RFC4648 (Hex)
 - Base 16 Encoding/Decoding
-- Run-Length Encoding/Decoding (WIP)
+  - RFC4648
+- Run-Length Encoding/Decoding
+  - Basic
+  - PackBits
 - LZ77 Encoding/Decoding (WIP)
 
 ## Usage
