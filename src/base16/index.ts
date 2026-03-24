@@ -1,3 +1,7 @@
+export const Base16Categories = ['rfc4648'] as const;
+
+export type Base16Category = typeof Base16Categories[number];
+
 export abstract class Base16 {
 
     /**

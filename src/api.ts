@@ -1,4 +1,4 @@
-import type { Base16 } from '@/base16';
+import type { Base16, Base16Category } from '@/base16';
 import type { Base32, Base32Category } from '@/base32';
 import type { Base64, Base64Catgory } from './base64';
 import type { RunLength, RunLengthCatgory } from '@/run-length';
@@ -57,9 +57,9 @@ class Kasten {
     public static base32 = (category?: Base32Category): Base32 => {
 
         switch(category) {
-            case 'rfc464hex':
+            case 'rfc468-hex':
                 return new RFC4648Base32Hex();
-            case 'rfc4649':
+            case 'rfc4648':
             default:
                 return new RFC4648Base32();
         }
@@ -68,8 +68,13 @@ class Kasten {
     /**
      * Create Base 16 codec instance.
      */
-    public static base16 = (): Base16 => {
-        return new RFC4648Base16();
+    public static base16 = (category?: Base16Category): Base16 => {
+
+        switch(category) {
+            case 'rfc4648':
+            default:
+                return new RFC4648Base16();
+        }
     }
 
     /**
@@ -94,6 +99,7 @@ export type {
     Base32,
     Base32Category,
     Base16,
+    Base16Category,
     RunLength,
     RunLengthCatgory
 }
