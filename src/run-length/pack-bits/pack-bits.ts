@@ -1,4 +1,5 @@
 import { RunLength } from '@/run-length';
+import { KastenRunLengthDecodeError } from '../errors';
 
 export class PackBits extends RunLength {
 
@@ -56,6 +57,55 @@ export class PackBits extends RunLength {
     }
     
     public override decode(runLength: Uint8Array): Uint8Array {
-        throw new Error('Method not implemented.');
+
+        const decoded: number[] = [];
+
+        const byteLength = runLength.length;
+
+        let i = 0;
+
+        while(i < byteLength) {
+
+            const header = runLength[i]!;
+
+            if (header === 0x80) continue;
+
+            if (0 <= header && header <= 0x7F) {
+                
+                const end = i + header + 2;
+
+                for (let j = i + 1; j < end; j++) {
+
+                    const byte = runLength[j];
+
+                    if (byte === undefined)
+                        throw new KastenRunLengthDecodeError('Invalid PackBits encoding');
+
+                    decoded.push(byte);
+                }
+
+                i = end;
+                continue;
+            }
+
+            if (0x81 <= header && header <= 0xFF) {
+
+                const count = 0x101 - header;
+
+                const byte = runLength[i + 1];
+
+                if (byte === undefined)
+                    throw new KastenRunLengthDecodeError('Invalid PackBits encoding');
+
+                for (let j = 0; j < count; j++) {
+                    decoded.push(byte);                    
+                }
+
+                i += 2;
+                continue;
+            }
+        }
+
+        return new Uint8Array(decoded);
     }
 }

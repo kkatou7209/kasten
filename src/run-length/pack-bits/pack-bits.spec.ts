@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'bun:test';
 import { PackBits } from '@/run-length/pack-bits/pack-bits';
+import { KastenRunLengthDecodeError } from '../errors';
 
 describe('BasicRunLength tests', () => {
 
@@ -36,36 +37,30 @@ describe('BasicRunLength tests', () => {
             ],
         ];
 
-        const runLength = new PackBits();
+        const packBits = new PackBits();
 
         for(const _case of cases) {
 
-            const encoded = runLength.encode(_case[0]!);
+            const encoded = packBits.encode(_case[0]!);
             expect(encoded).toEqual(_case[1]!);
 
-            // const decoded = runLength.decode(_case[1]!);
-            // expect(decoded).toEqual(_case[0]!);
+            const decoded = packBits.decode(_case[1]!);
+            expect(decoded).toEqual(_case[0]!);
         }
     });
 
-    // it('should repeat count is lower than equal to 255.', () => {
+    it('should throw when decodes invalid encoding', () => {
 
-    //     const cases = [
-    //         [
-    //             new Uint8Array(Array.from({ length: 256 }).map(_ => 0x06)),
-    //             new Uint8Array([0xFF, 0x06, 0x01, 0x06])
-    //         ]
-    //     ];
+        const cases = [
+            new Uint8Array([0x01, 0x04]), // 1 byte lacked
+            new Uint8Array([0xFE]), // no repeat byte
+        ];
 
-    //     const runLength = new BasicRunLength();
+        const packBits = new PackBits();
 
-    //     for(const _case of cases) {
-
-    //         const encoded = runLength.encode(_case[0]!);
-    //         expect(encoded).toEqual(_case[1]!);
-
-    //         const decoded = runLength.decode(_case[1]!);
-    //         expect(decoded).toEqual(_case[0]!);
-    //     }
-    // });
+        for (const _case of cases) {
+            expect(() => packBits.decode(_case))
+                .toThrow(KastenRunLengthDecodeError);
+        }
+    });
 });
