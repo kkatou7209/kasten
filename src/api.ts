@@ -10,6 +10,7 @@ import { RFC4648Base64 } from '@/base64/rfc4648/rfc4648';
 import { RFC4648Base64URL } from '@/base64/rfc4648/rfc4648url';
 import { BasicRunLength } from '@/run-length/basic/basic-run-length';
 import { PackBits } from '@/run-length/pack-bits/pack-bits';
+import { Pdf } from '@/run-length/pdf/pdf';
 
 /**
  * Entry point of the Kasten library.
@@ -85,6 +86,8 @@ class Kasten {
         switch(category) {
             case 'pack-bits':
                 return new PackBits();
+            case 'pdf':
+                return new Pdf();
             case 'basic':
             default:
                 return new BasicRunLength();

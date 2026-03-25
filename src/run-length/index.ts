@@ -1,4 +1,4 @@
-export const RunLengthCatgories = ['basic', 'pack-bits'] as const;
+export const RunLengthCatgories = ['basic', 'pack-bits', 'pdf'] as const;
 
 export type RunLengthCatgory = typeof RunLengthCatgories[number];
 
