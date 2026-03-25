@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { PackBits } from '@/run-length/pack-bits/pack-bits';
+import { Pdf } from '@/run-length/pdf/pdf';
 import { KastenRunLengthDecodeError } from '../errors';
 
 describe('BasicRunLength tests', () => {
@@ -9,7 +9,7 @@ describe('BasicRunLength tests', () => {
         const cases = [
             [
                 new Uint8Array([0x05, 0x05, 0x7F, 0x65, 0x65, 0x65, 0x35, 0x35, 0x45]),
-                new Uint8Array([0x02, 0x05, 0x05, 0x7F, 0xFE, 0x65, 0x02, 0x35, 0x35, 0x45]),
+                new Uint8Array([0xFF, 0x05, 0x00, 0x7F, 0xFE, 0x65, 0xFF, 0x35, 0x00, 0x45]),
             ],
             [
                 new Uint8Array([]),
@@ -37,22 +37,22 @@ describe('BasicRunLength tests', () => {
             ],
         ];
 
-        const packBits = new PackBits();
+        const pdf = new Pdf();
 
         for(const _case of cases) {
 
-            const encoded = packBits.encode(_case[0]!);
+            const encoded = pdf.encode(_case[0]!);
             expect(encoded).toEqual(_case[1]!);
 
-            const decoded = packBits.decode(_case[1]!);
+            const decoded = pdf.decode(_case[1]!);
             expect(decoded).toEqual(_case[0]!);
         }
 
         const bigBytes = crypto.getRandomValues(new Uint8Array(5120));
 
-        const encoded = packBits.encode(bigBytes);
+        const encoded = pdf.encode(bigBytes);
 
-        expect(packBits.decode(encoded)).toEqual(bigBytes);
+        expect(pdf.decode(encoded)).toEqual(bigBytes);
     });
 
     it('should throw when decodes invalid encoding', () => {
@@ -62,10 +62,10 @@ describe('BasicRunLength tests', () => {
             new Uint8Array([0xFE]), // no repeat byte
         ];
 
-        const packBits = new PackBits();
+        const pdf = new Pdf();
 
         for (const _case of cases) {
-            expect(() => packBits.decode(_case))
+            expect(() => pdf.decode(_case))
                 .toThrow(KastenRunLengthDecodeError);
         }
     });

@@ -1,6 +1,6 @@
 # Kasten
 
-TypeScript Toolbox of Codecs and Cryptographies.
+TypeScript Toolbox of Codecs and Cryptographies with no dependencies.
 
 ## Features
 
