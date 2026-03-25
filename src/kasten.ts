@@ -1,6 +1,6 @@
 import type { Base16, Base16Category } from '@/base16';
 import type { Base32, Base32Category } from '@/base32';
-import type { Base64, Base64Catgory } from './base64';
+import type { Base64, Base64Category } from '@/base64';
 import type { RunLength, RunLengthCatgory } from '@/run-length';
 import { RFC4648Base16 } from '@/base16/rfc4648/rfc4648';
 import { RFC4648Base32 } from '@/base32/rfc4648/rfc4648';
@@ -10,6 +10,7 @@ import { RFC4648Base64 } from '@/base64/rfc4648/rfc4648';
 import { RFC4648Base64URL } from '@/base64/rfc4648/rfc4648url';
 import { BasicRunLength } from '@/run-length/basic/basic-run-length';
 import { PackBits } from '@/run-length/pack-bits/pack-bits';
+import { Pdf } from '@/run-length/pdf/pdf';
 
 /**
  * Entry point of the Kasten library.
@@ -37,7 +38,7 @@ class Kasten {
      * Creates Base 64 codec instance.
      * @param category Base 64 category.
      */
-    public static base64 = (category?: Base64Catgory): Base64 => {
+    public static base64 = (category?: Base64Category): Base64 => {
 
         switch(category) {
             case 'rfc4648-url':
@@ -85,6 +86,8 @@ class Kasten {
         switch(category) {
             case 'pack-bits':
                 return new PackBits();
+            case 'pdf':
+                return new Pdf();
             case 'basic':
             default:
                 return new BasicRunLength();
@@ -92,14 +95,14 @@ class Kasten {
     }
 }
 
-export type {
+export {
     Kasten,
-    Base64,
-    Base64Catgory,
-    Base32,
-    Base32Category,
-    Base16,
-    Base16Category,
-    RunLength,
-    RunLengthCatgory
+    type Base64,
+    type Base64Category as Base64Catgory,
+    type Base32,
+    type Base32Category,
+    type Base16,
+    type Base16Category,
+    type RunLength,
+    type RunLengthCatgory
 }
