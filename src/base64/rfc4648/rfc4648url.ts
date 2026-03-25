@@ -39,8 +39,6 @@ export class RFC4648Base64URL extends Base64 {
 
         let ci = 0;
 
-        let charCout = 0;
-
         for (let i = 0; i < bytes.length; i += 3) {
 
             const b1 = bytes[i]!;
@@ -56,14 +54,6 @@ export class RFC4648Base64URL extends Base64 {
             chars[ci++] = ENCODE_TABLE[c2]!;
             chars[ci++] = ENCODE_TABLE[c3]!;
             chars[ci++] = ENCODE_TABLE[c4]!;
-
-            charCout += 4;
-
-            if (charCout === 76 && ci < chars.length) {
-                charCout = 0;
-                chars[ci++] = CharCodes.CR;
-                chars[ci++] = CharCodes.LF;
-            }
         }
 
         const remain = bytes.length % 3;
