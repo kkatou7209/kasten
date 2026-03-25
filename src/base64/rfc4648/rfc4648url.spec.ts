@@ -37,6 +37,20 @@ describe('RFC4648Base64URL tests', () => {
         }
     });
 
+    it('should compeitible to toBase64', () => {
+
+        const bytes = new Uint8Array(4069);
+                
+        crypto.getRandomValues(bytes);
+
+        const encoded = bytes.toBase64({ alphabet: 'base64url' });
+
+        const base64 = new RFC4648Base64URL();
+
+        expect(base64.encode(bytes)).toEqual(encoded);
+        expect(base64.decode(encoded)).toEqual(bytes);
+    });
+
     it('should use the url safe alphabet during encoding', () => {
 
         const base64url = new RFC4648Base64URL();
