@@ -1,6 +1,10 @@
 # Kasten
 
-TypeScript Toolbox of Codecs and Cryptographies.
+TypeScript Toolbox of Codecs and Cryptographies with no dependencies.
+
+> This library is currently in development.
+>
+> The API can be changed in future release.
 
 ## Features
 
@@ -13,12 +17,14 @@ TypeScript Toolbox of Codecs and Cryptographies.
   - RFC4648 (Hex)
 - Base 16 Encoding/Decoding
   - RFC4648
+  - (WIP)AsciiHexDecode (PDF1.7)
 - Base 85
-  - Ascii85 (WIP)
+  - (WIP)Ascii85Decode (PDF1.7)
 - Run-Length Encoding/Decoding
   - Basic
   - PackBits
-- LZ77 Encoding/Decoding (WIP)
+  - RunLengthDecode (PDF1.7)
+- (WIP)LZ77 Encoding/Decoding
 
 ## Usage
 
@@ -39,13 +45,14 @@ All codecs available in Kasten are below.
 |Group|Spec|Method|Category|Summary|
 |:-|:-|:-|:-|:-|
 |Base 64|RFC2045|`base64`|`rfc2045`|The old Base 64 specification.|
-|Base 64|RFC4648|`base64`|`rfc4648`|The latest Base 64 specification.|
-|Base 64|RFC4648(URL)|`base64`|`rfc4648-url`|The latest Base 64 specification for URL safe encoding.|
+|Base 64|RFC4648|`base64`|`rfc4648`|The latest Base 64 specification. It is compatible with `Uint8Array.prototype.toBase64`.|
+|Base 64|RFC4648(URL)|`base64`|`rfc4648-url`|The latest Base 64 specification for URL safe encoding. It is compatible with `Uint8Array.prototype.toBase64`.|
 |Base 32|RFC4648|`base32`|`rfc4648`|The latest Base 32 specification.|
 |Base 32|RFC4648 (HEX)|`base32`|`rfc4648-hex`|The latest Base 32 specification for hexadecimal encoding.|
 |Base 16|RFC4648|`base16`|`rfc4648`|The latest Base 16 specification.|
 |Run-Length|Basic|`runLength`|`basic`|The basic and old Run-Length encoding.|
-|Run-Length|Basic|`runLength`|`pack-bits`|The old Run-Length encoding of Apple.|
+|Run-Length|PackBits|`runLength`|`pack-bits`|The old Run-Length encoding accepted by [MacPrint of Apple](https://web.archive.org/web/20080705155158/http://developer.apple.com/technotes/tn/tn1023.html).|
+|Run-Length|RunLengthDecode (PDF1.7)|`runLength`|`pdf`|The Run-Length specofication of [PDF1.7](https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf).|
 
 ## License
 
