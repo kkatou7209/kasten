@@ -1,6 +1,6 @@
 # Kasten
 
-TypeScript Toolbox of Codecs and Cryptographies with no dependencies.
+TypeScript toolbox for encoding, decoding, and compression algorithms with no dependencies.
 
 > This library is currently in development.
 >

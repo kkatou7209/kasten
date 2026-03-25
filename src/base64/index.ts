@@ -1,4 +1,4 @@
-export type Base64Catgory = typeof Base64Categories[number];
+export type Base64Category = typeof Base64Categories[number];
 
 export const Base64Categories = ['rfc4648', 'rfc4648-url', 'rfc2025'] as const;
 
