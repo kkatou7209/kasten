@@ -1,6 +1,9 @@
 import { RunLength } from '@/run-length';
 import { KastenRunLengthDecodeError } from '../errors';
 
+/**
+ * PackBits codec.
+ */
 export class PackBits extends RunLength {
 
     public override encode(bytes: Uint8Array): Uint8Array {
