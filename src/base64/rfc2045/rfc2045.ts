@@ -1,5 +1,5 @@
 import { Base64 } from '@/base64';
-import { CharCodes } from '@/char-codes';
+import { CharCodes } from '@/utils/char-codes';
 import { KastenBase64DecodeError } from '@/base64/errors';
 
 export class RFC2045Base64 extends Base64 {
@@ -31,6 +31,7 @@ export class RFC2045Base64 extends Base64 {
         if (bytes.length === 0) return '';
 
         const ENCODE_TABLE = RFC2045Base64.ENCODE_TABLE;
+        const { CR, LF } = CharCodes;
 
         const baseSize = Math.ceil(bytes.length / 3) * 4;
         const linebreaks = Math.floor((baseSize - 1) / 76);
@@ -61,8 +62,8 @@ export class RFC2045Base64 extends Base64 {
 
             if (charCout === 76 && ci < chars.length) {
                 charCout = 0;
-                chars[ci++] = CharCodes.CR;
-                chars[ci++] = CharCodes.LF;
+                chars[ci++] = CR;
+                chars[ci++] = LF;
             }
         }
 

@@ -3,6 +3,7 @@ import type { Base32, Base32Category } from '@/base32';
 import type { Base64, Base64Category } from '@/base64';
 import type { RunLength, RunLengthCatgory } from '@/run-length';
 import { RFC4648Base16 } from '@/base16/rfc4648/rfc4648';
+import { AsciiHexDecode } from '@/base16/ascii/ascii';
 import { RFC4648Base32 } from '@/base32/rfc4648/rfc4648';
 import { RFC4648Base32Hex } from '@/base32/rfc4648/rfc4648hex';
 import { RFC2045Base64 } from '@/base64/rfc2045/rfc2045';
@@ -72,6 +73,8 @@ class Kasten {
     public static base16 = (category?: Base16Category): Base16 => {
 
         switch(category) {
+            case 'ascii':
+                return new AsciiHexDecode();
             case 'rfc4648':
             default:
                 return new RFC4648Base16();

@@ -50,9 +50,10 @@ All codecs available in Kasten are below.
 |Base 32|RFC4648|`base32`|`rfc4648`|The latest Base 32 specification.|
 |Base 32|RFC4648 (HEX)|`base32`|`rfc4648-hex`|The latest Base 32 specification for hexadecimal encoding.|
 |Base 16|RFC4648|`base16`|`rfc4648`|The latest Base 16 specification.|
+|Base 16|AsciiHexDecode (PDF1.7)|`base16`|`ascii`|The Base 16 specification of PDF1.7.|
 |Run-Length|Basic|`runLength`|`basic`|The basic and old Run-Length encoding.|
 |Run-Length|PackBits|`runLength`|`pack-bits`|The old Run-Length encoding accepted by [MacPrint of Apple](https://web.archive.org/web/20080705155158/http://developer.apple.com/technotes/tn/tn1023.html).|
-|Run-Length|RunLengthDecode (PDF1.7)|`runLength`|`pdf`|The Run-Length specofication of [PDF1.7](https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf).|
+|Run-Length|RunLengthDecode (PDF1.7)|`runLength`|`pdf`|The Run-Length specofication of PDF1.7.|
 
 ## License
 

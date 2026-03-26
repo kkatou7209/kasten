@@ -1,5 +1,5 @@
 import { Base32 } from '@/base32';
-import { CharCodes } from '@/char-codes';
+import { CharCodes } from '@/utils/char-codes';
 import { KastenBase32DecodeError } from '@/base32/errors';
 
 export class RFC4648Base32Hex extends Base32 {
@@ -88,7 +88,6 @@ export class RFC4648Base32Hex extends Base32 {
 
         const DECODED_TABLE = RFC4648Base32Hex.DECODED_TABLE;
         const PADDING = RFC4648Base32Hex.PADDING_CHAR_CODE;
-        const { CR, LF, SP, HT } = CharCodes;
 
         const chars = new Uint8Array(base32.length);
 
@@ -98,10 +97,7 @@ export class RFC4648Base32Hex extends Base32 {
 
             const c = upper.charCodeAt(i);
 
-            if (c !== CR &&
-                c !== LF &&
-                c !== SP &&
-                c !== HT) {
+            if (!CharCodes.isWhitespace(c)) {
 
                 chars[charCount++] = c;
             }
