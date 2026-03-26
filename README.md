@@ -6,7 +6,13 @@ TypeScript toolbox for encoding, decoding, and compression algorithms with no de
 >
 > The API can be changed in future release.
 
+## Goals
+
+To provide several codec utility with no dependencies and simple API.
+
 ## Features
+
+*Kasten* provides several variant of encoding, decoding and compression functionalities for JavaScript.
 
 - Base 64 Encoding/Decoding
   - RFC2045
@@ -17,20 +23,40 @@ TypeScript toolbox for encoding, decoding, and compression algorithms with no de
   - RFC4648 (Hex)
 - Base 16 Encoding/Decoding
   - RFC4648
-  - (WIP)AsciiHexDecode (PDF1.7)
+  - AsciiHexDecode (PDF1.7)
 - Base 85
   - (WIP)Ascii85Decode (PDF1.7)
 - Run-Length Encoding/Decoding
   - Basic
   - PackBits
   - RunLengthDecode (PDF1.7)
-- (WIP)LZ77 Encoding/Decoding
+
+You can uses those features by very simple API. See also [Usage](#usage) section.
+
+Following features are currently working in progress. 
+
+Other formats can be added in future.
+
+- Base 85
+  - Ascii85Decode (PDF1.7)
+- LZ77
+  - Pure LZ77
+  - LZSS
+  - LZ4
+- LZW
+- LZH
+- LZX
+- Deflate
+- Zstd
+- Brotli
 
 ## Usage
 
 Create codec instance with static methods of `Kasten`.
 
 ```ts
+import { Kasten } from 'kasten-js';
+
 const data: Uint8Array = ...;
 
 const base64 = Kasten.base64('rfc4648');
@@ -38,6 +64,14 @@ const base64 = Kasten.base64('rfc4648');
 const encoded: string = base64.encode(data);
 
 const decoded: Uint8Array = base64.decode(encoded);
+```
+
+If no category specified, returns default implementation.
+
+```ts
+import { Kasten } from 'kasten-js';
+
+const base16 = Kasten.base16();
 ```
 
 All codecs available in Kasten are below.
