@@ -1,4 +1,4 @@
-export const Base16Categories = ['rfc4648'] as const;
+export const Base16Categories = ['rfc4648', 'ascii'] as const;
 
 export type Base16Category = typeof Base16Categories[number];
 
