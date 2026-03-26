@@ -1,6 +1,6 @@
 import { Base64 } from '@/base64';
 import { KastenBase64DecodeError } from '@/base64/errors';
-import { CharCodes } from '@/char-codes';
+import { CharCodes } from '@/utils/char-codes';
 
 export class RFC4648Base64 extends Base64 {
 
@@ -77,10 +77,7 @@ export class RFC4648Base64 extends Base64 {
 
         for (let i = 0; i < base64.length; i++) {
             const c = base64.charCodeAt(i);
-            if (c !== CharCodes.CR
-                && c !== CharCodes.LF
-                && c !== CharCodes.SP
-                && c !== CharCodes.HT) {
+            if (!CharCodes.isWhitespace(c)) {
                     
                 line[lineCharCount++] = c;
             }

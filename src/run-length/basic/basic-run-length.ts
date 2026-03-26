@@ -1,5 +1,8 @@
 import { RunLength } from '@/run-length';
 
+/**
+ * Basic Run-Length codec.
+ */
 export class BasicRunLength extends RunLength {
     
     public override encode(bytes: Uint8Array): Uint8Array {

@@ -1,5 +1,5 @@
 import { Base16 } from '@/base16';
-import { CharCodes } from '@/char-codes';
+import { CharCodes } from '@/utils/char-codes';
 import { KastenBase16DecodeError } from '../errors';
 
 /**
@@ -51,7 +51,6 @@ export class RFC4648Base16 extends Base16 {
     public override decode(base16: string): Uint8Array {
 
         const DECODED_TABLE = RFC4648Base16.DECODED_TABLE;
-        const { CR, LF, SP, HT, } = CharCodes;
 
         const upper = base16.toUpperCase();
         const chars = new Uint8Array(base16.length);
@@ -61,7 +60,7 @@ export class RFC4648Base16 extends Base16 {
         for (let i = 0; i < base16.length; i++) {
             const c = upper.charCodeAt(i);
 
-            if (c === CR || c === LF || c === SP || c === HT)
+            if (CharCodes.isWhitespace(c))
                 continue;
 
             if (!DECODED_TABLE[c] || DECODED_TABLE[c] == 255)
