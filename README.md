@@ -39,13 +39,6 @@ Other formats can be added in future.
 
 - Base 85
   - Ascii85Decode (PDF1.7)
-- LZ77
-  - Pure LZ77
-  - LZSS
-  - LZ4
-- LZW
-- LZH
-- LZX
 - Deflate
 - Zstd
 - Brotli
@@ -59,7 +52,7 @@ import { Kasten } from 'kasten-js';
 
 const data: Uint8Array = ...;
 
-const base64 = Kasten.base64('rfc4648');
+const base64 = Kasten.codecs.base64('rfc4648');
 
 const encoded: string = base64.encode(data);
 
@@ -71,7 +64,7 @@ If no category specified, returns default implementation.
 ```ts
 import { Kasten } from 'kasten-js';
 
-const base16 = Kasten.base16();
+const base16 = Kasten.codecs.base16();
 ```
 
 All codecs available in Kasten are below.
