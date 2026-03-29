@@ -1,16 +1,22 @@
 export class CharCodes {
 
-    public static HT = 9;
+    public static readonly HT = 9;
     
-    public static LF = 10;
+    public static readonly LF = 10;
     
-    public static VT = 11;
+    public static readonly VT = 11;
     
-    public static FF = 12;
+    public static readonly FF = 12;
     
-    public static CR = 13;
+    public static readonly CR = 13;
     
-    public static SP = 32;
+    public static readonly SP = 32;
+
+    public static readonly LessThan = 60;
+
+    public static readonly GreaterThan = 62;
+
+    public static readonly Tilde = 126;
 
     private constructor() {}
 
