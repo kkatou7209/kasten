@@ -2,7 +2,7 @@ import { Codec } from '@/codecs/codec';
 
 export type Base32Category = typeof Base32Categories[number];
 
-export const Base32Categories = ['rfc4648', 'rfc468-hex'] as const;
+export const Base32Categories = ['rfc-4648', 'rfc-468-hex'] as const;
 
 /**
  * Base32 encoding and decoding.
